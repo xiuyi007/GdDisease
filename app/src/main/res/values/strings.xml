@@ -1,0 +1,29 @@
+<resources>
+    <string-array name="place_array">
+        <item>鄞州区</item>
+        <item>海曙区</item>
+        <item>北仑区</item>
+        <item>镇海区</item>
+        <item>江北区</item>
+    </string-array>
+
+    <string-array name="status_array">
+        <item>修复</item>
+        <item>未修复</item>
+    </string-array>
+
+    <string-array name="type_array">
+        <item>线裂</item>
+        <item>坑洞</item>
+        <item>跳车</item>
+        <item>错台</item>
+        <item>沉陷</item>
+    </string-array>
+
+
+    <string name="app_name">GdDisease</string>
+    <string name="bar_one">地图</string>
+    <string name="bar_two">数据</string>
+    <string name="bar_three">我的</string>
+    <string name="search_hint">搜索病害</string>
+</resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="@color/bar_color_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/me_info">
+        <TextView
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/me_head"
+            android:layout_marginLeft="15dp"
+            android:text="游客"
+            android:drawableLeft="@drawable/account_small"
+            android:textSize="18dp" />
+        <TextView
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/me_message"
+            android:layout_marginLeft="15dp"
+            android:text="消息"
+            android:drawableLeft="@drawable/email_small"
+            android:drawablePadding="5dp"
+            android:textSize="18dp" />
+        <TextView
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/me_setting"
+            android:layout_marginLeft="15dp"
+            android:text="设置"
+            android:drawableLeft="@drawable/detail_small"
+            android:drawablePadding="5dp"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="20dp"
+        android:text="目标病害"
+        android:textStyle="bold"
+        android:textColor="@color/me_color_title"
+        android:textSize="25sp"
+        android:id="@+id/me_tv_target"
+        android:layout_below="@+id/me_info"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/me_rv_target"
+        android:layout_below="@+id/me_tv_target"
+        android:minHeight="300dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textSize="25sp"
+        android:id="@+id/me_tv_ok"
+        android:textColor="@color/me_color_title"
+        android:textStyle="bold"
+        android:text="已解决"
+        android:layout_below="@id/me_rv_target"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/me_rv_ok"
+        android:layout_below="@+id/me_tv_ok"/>
+</RelativeLayout>
