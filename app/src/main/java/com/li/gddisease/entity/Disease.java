@@ -13,7 +13,7 @@ public class Disease {
     }
 
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int id;
 
 
@@ -82,8 +82,21 @@ public class Disease {
         this.place = place;
     }
 
+    /*
+    自动编号后不需要赋值id
+     */
+    @Deprecated
     public Disease(int id, String place, double longitude, double latitude, int type, String description, Date date) {
         this.id = id;
+        this.place = place;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.type = type;
+        this.description = description;
+        this.date = date;
+    }
+
+    public Disease(String place, double longitude, double latitude, int type, String description, Date date) {
         this.place = place;
         this.longitude = longitude;
         this.latitude = latitude;

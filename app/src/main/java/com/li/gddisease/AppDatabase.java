@@ -18,7 +18,7 @@ import util.Converters;
 
 @TypeConverters({Converters.class})
 @Database(exportSchema = true,
-        entities = {User.class, Disease.class, Handle.class}, version = 1
+        entities = {User.class, Disease.class, Handle.class}, version = 2
         )
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DB_NAME = "mDatabase.db";
@@ -35,7 +35,7 @@ public abstract class AppDatabase extends RoomDatabase {
         return Room.databaseBuilder(
                 context,
                 AppDatabase.class,
-                DB_NAME).allowMainThreadQueries().build();
+                DB_NAME).fallbackToDestructiveMigration().allowMainThreadQueries().build();
     }
 
 

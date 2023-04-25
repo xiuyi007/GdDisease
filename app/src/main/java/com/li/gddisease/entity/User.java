@@ -14,7 +14,7 @@ public class User {
         password = mPassword;
     }
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int id;
 
     public String username;

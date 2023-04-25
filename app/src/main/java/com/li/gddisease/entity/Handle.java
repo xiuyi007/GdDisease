@@ -16,7 +16,7 @@ import java.security.PublicKey;
 public class Handle {
 
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int id;
 
     @ColumnInfo(name = "user_id")
@@ -29,6 +29,13 @@ public class Handle {
 
     public Handle() {}
 
+    public Handle(int userId, int diseaseId, int status) {
+        this.userId = userId;
+        this.diseaseId = diseaseId;
+        this.status = status;
+    }
+
+    @Deprecated
     public Handle(int id, int userId, int diseaseId, int status) {
         this.id = id;
         this.userId = userId;

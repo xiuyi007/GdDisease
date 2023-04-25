@@ -25,15 +25,20 @@ public class DiseaseInfoGenerator {
 
 
     public static Disease generateRandomDisease() {
-        int id = generateUniqueId();
+//        int id = generateUniqueId();
         String area = generateRandomArea();
         double[] doubles = generateRandomLocation();
         int type = generateRandomType();
         Date date = generateRandomDate();
         String description = generateRandomDescription();
-        return new Disease(id, area, doubles[1], doubles[0], type, description, date);
+//        return new Disease(id, area, doubles[1], doubles[0], type, description, date);
+        return new Disease(area, doubles[1], doubles[0], type, description, date);
     }
 
+    /*
+    更改了数据库id为自动编号，不再需要生成id了
+     */
+    @Deprecated
     private static int generateUniqueId() {
         int id = random.nextInt(1000000);
         while (usedIds.contains(id)) {
