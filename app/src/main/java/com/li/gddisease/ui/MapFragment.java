@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.MapsInitializer;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
@@ -75,6 +76,8 @@ public class MapFragment extends Fragment implements AMap.OnMyLocationChangeList
         getDb();
         getDao();
         drawMarker("");
+        LatLng center = new LatLng(29.8683, 121.5440);
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 12));
 
 //        InsertDisease();
 //        InsertHandle();
