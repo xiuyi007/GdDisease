@@ -8,8 +8,9 @@
     </string-array>
 
     <string-array name="status_array">
-        <item>修复</item>
-        <item>未修复</item>
+        <item>修复中</item>
+        <item>已修复</item>
+        <item>未分配</item>
     </string-array>
 
     <string-array name="type_array">

@@ -7,6 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.li.gddisease.dao.DiseaseDao;
 import com.li.gddisease.dao.UserDao;
 import com.li.gddisease.entity.Disease;
 import com.li.gddisease.entity.Handle;
@@ -35,5 +36,9 @@ public abstract class AppDatabase extends RoomDatabase {
                 AppDatabase.class,
                 DB_NAME).allowMainThreadQueries().build();
     }
+
+
+
     public abstract UserDao userDao();
+    public abstract DiseaseDao diseaseDao();
 }

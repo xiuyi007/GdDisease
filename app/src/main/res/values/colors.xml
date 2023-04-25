@@ -12,4 +12,5 @@
     <color name="bar_color_checked">#D2D6F9</color>
     <color name="me_color_title">#9F000000</color>
     <color name="search_bar_container_color">#D1D0D0</color>
+    <color name="m_background">#F1F1F1</color>
 </resources>

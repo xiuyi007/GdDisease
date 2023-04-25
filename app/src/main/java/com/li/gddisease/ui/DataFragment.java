@@ -17,6 +17,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.sqlite.db.SimpleSQLiteQuery;
@@ -26,26 +27,31 @@ import androidx.sqlite.db.SupportSQLiteQuery;
 import com.li.gddisease.AppDatabase;
 import com.li.gddisease.MainActivity;
 import com.li.gddisease.R;
+import com.li.gddisease.dao.DiseaseDao;
 import com.li.gddisease.dto.DiseaseChosenDto;
 import com.li.gddisease.entity.Disease;
 import com.li.gddisease.entity.User;
+import com.li.gddisease.pojo.DiseaseReturnPojo;
 import com.li.gddisease.ui.adapter.DatePickerFragment;
 import com.li.gddisease.ui.adapter.LinearRecycleViewAdapter;
 
 import java.util.List;
 
+import util.MyUtil;
 import util.SqlHelper;
 import util.ToastUtil;
 
-public class DataFragment extends Fragment implements AdapterView.OnItemSelectedListener, DatePickerFragment.DateListener {
+public class DataFragment extends Fragment implements AdapterView.OnItemSelectedListener, DatePickerFragment.DateListener , LinearRecycleViewAdapter.OnItemClickListener{
     private Spinner place_spinner;
     private Spinner type_spinner;
     private Spinner status_spinner;
     private AppCompatButton mBtnDate;
     private DiseaseChosenDto disease;
     private AppDatabase db;
+    private DiseaseDao diseaseDao;
     private RecyclerView mRv;
-    private List<Disease> list;
+    private List<DiseaseReturnPojo> list;
+    private View recycleView;
 
     @Nullable
     @Override
@@ -57,8 +63,25 @@ public class DataFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        recycleView = view;
         init(view);
+        getDb();
+        getDao();
+        setDisease(); //不知道要不要去掉，去了又报错了，留着
+        setRecycleView(view);
+    }
+
+
+    private void setRecycleView(View view)
+    {
+        if (list == null)
+        {
+            System.out.println();;
+        }
+        else
+            System.out.println();
         mRv = view.findViewById(R.id.rv_main);
+        mRv.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         mRv.setLayoutManager(new LinearLayoutManager(getContext()));
         mRv.setAdapter(new LinearRecycleViewAdapter(getContext(), new LinearRecycleViewAdapter.OnItemClickListener() {
             @Override
@@ -67,7 +90,6 @@ public class DataFragment extends Fragment implements AdapterView.OnItemSelected
             }
         }, list));
     }
-
 
     private void init(View view) {
         mBtnDate = view.findViewById(R.id.btn_date);
@@ -105,12 +127,7 @@ public class DataFragment extends Fragment implements AdapterView.OnItemSelected
         place_spinner.setOnItemSelectedListener(DataFragment.this);
         status_spinner.setOnItemSelectedListener(DataFragment.this);
         type_spinner.setOnItemSelectedListener(DataFragment.this);
-        db = AppDatabase.getInstance(getActivity());
 
-        StringBuilder s = new StringBuilder("select * from Disease");
-        disease = new DiseaseChosenDto();
-        String sql = SqlHelper.disease_sql(disease);
-        SupportSQLiteQuery sqLiteQuery = new SimpleSQLiteQuery(sql);
 
 /*        if (all.getValue() != null && !all.getValue().isEmpty())
             for (User user : all.getValue()) {
@@ -119,6 +136,29 @@ public class DataFragment extends Fragment implements AdapterView.OnItemSelected
         else
             ToastUtil.showMsg(getActivity(), "no info");*/
     }
+
+    private void getDb()
+    {
+        db = AppDatabase.getInstance(getActivity());
+    }
+
+    private void getDao()
+    {
+        diseaseDao = db.diseaseDao();
+    }
+
+    @Deprecated
+    private void setDisease()
+    {
+        StringBuilder s = new StringBuilder("select * from Disease");
+        disease = new DiseaseChosenDto("鄞州区", 1, 1);
+        disease.setStatus(1);
+        String sql = SqlHelper.disease_sql(disease);
+        SupportSQLiteQuery sqLiteQuery = new SimpleSQLiteQuery(sql);
+        List<DiseaseReturnPojo> diseases = diseaseDao.getDiseaseByConditional(sqLiteQuery);
+        list = diseases;
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (disease == null)
@@ -132,42 +172,28 @@ public class DataFragment extends Fragment implements AdapterView.OnItemSelected
                     break;
                 case "type":
                     int tmp = 0;
-                    switch (parent.getItemAtPosition(position).toString())
-                    {
-                        case "线裂":
-                            tmp = 1;
-                            break;
-                        case "坑洞":
-                            tmp = 2;
-                            break;
-                        case "跳车":
-                            tmp = 3;
-                            break;
-                        case "错台":
-                            tmp = 4;
-                            break;
-                        case "沉陷":
-                            tmp = 5;
-                            break;
-                    }
+                    tmp = MyUtil.convertStatus_toInt(parent.getItemAtPosition(position).toString());
                     disease.setType(tmp);
+                    break;
                 case "status":
                     int status = 0;
-                    switch (parent.getItemAtPosition(position).toString())
-                    {
-                        case "修复":
-                            status = 1;
-                            break;
-                        case "未修复":
-                            status = 2;
-                            break;
-                    }
+                    status = MyUtil.convertStatus_toInt(parent.getItemAtPosition(position).toString());
                     disease.setStatus(status);
+                    break;
             }
-
-            Log.d("mDisease", disease.toString());
-
         }
+        StringBuilder s = new StringBuilder("select * from Disease");
+        String sql = SqlHelper.disease_sql(disease);
+        SupportSQLiteQuery sqLiteQuery = new SimpleSQLiteQuery(sql);
+        List<DiseaseReturnPojo> data = diseaseDao.getDiseaseByConditional(sqLiteQuery);
+        if (disease.getStatus() == 3)
+        {
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).setType(3);
+            }
+        }
+        list = data;
+        setRecycleView(recycleView);
     }
 
     @Override
@@ -181,4 +207,8 @@ public class DataFragment extends Fragment implements AdapterView.OnItemSelected
     }
 
 
+    @Override
+    public void OnClick(int pos) {
+        ToastUtil.showMsg(getContext(), pos + " am clicked");
+    }
 }

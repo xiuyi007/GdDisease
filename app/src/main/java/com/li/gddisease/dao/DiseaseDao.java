@@ -2,12 +2,14 @@ package com.li.gddisease.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.RawQuery;
 import androidx.sqlite.db.SupportSQLiteQuery;
 
 import com.li.gddisease.entity.Disease;
 import com.li.gddisease.entity.User;
+import com.li.gddisease.pojo.DiseaseReturnPojo;
 
 import java.util.List;
 
@@ -15,6 +17,8 @@ import java.util.List;
 public interface DiseaseDao {
 
     @RawQuery
-    List<Disease> getDiseaseByConditional(SupportSQLiteQuery query);
+    List<DiseaseReturnPojo> getDiseaseByConditional(SupportSQLiteQuery query);
 
+    @Insert
+    void insertUsers(Disease... diseases);
 }

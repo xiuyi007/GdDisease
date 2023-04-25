@@ -2,4 +2,6 @@
 <resources>
     <dimen name="bar_text_size">20sp</dimen>
     <dimen name="bar_height">45dp</dimen>
+    <dimen name="data_title_size">18sp</dimen>
+    <dimen name="data_info_size">15sp</dimen>
 </resources>
