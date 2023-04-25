@@ -152,7 +152,6 @@ public class DataFragment extends Fragment implements AdapterView.OnItemSelected
     {
         StringBuilder s = new StringBuilder("select * from Disease");
         disease = new DiseaseChosenDto("鄞州区", 1, 1);
-        disease.setStatus(1);
         String sql = SqlHelper.disease_sql(disease);
         SupportSQLiteQuery sqLiteQuery = new SimpleSQLiteQuery(sql);
         List<DiseaseReturnPojo> diseases = diseaseDao.getDiseaseByConditional(sqLiteQuery);
@@ -162,7 +161,7 @@ public class DataFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (disease == null)
-            disease = new DiseaseChosenDto("鄞州区", 0, 0);
+            disease = new DiseaseChosenDto("鄞州区", 1, 1);
         else
         {
             switch (parent.getTag().toString())
@@ -172,7 +171,7 @@ public class DataFragment extends Fragment implements AdapterView.OnItemSelected
                     break;
                 case "type":
                     int tmp = 0;
-                    tmp = MyUtil.convertStatus_toInt(parent.getItemAtPosition(position).toString());
+                    tmp = MyUtil.ConvertType_toInt(parent.getItemAtPosition(position).toString());
                     disease.setType(tmp);
                     break;
                 case "status":
@@ -182,7 +181,6 @@ public class DataFragment extends Fragment implements AdapterView.OnItemSelected
                     break;
             }
         }
-        StringBuilder s = new StringBuilder("select * from Disease");
         String sql = SqlHelper.disease_sql(disease);
         SupportSQLiteQuery sqLiteQuery = new SimpleSQLiteQuery(sql);
         List<DiseaseReturnPojo> data = diseaseDao.getDiseaseByConditional(sqLiteQuery);

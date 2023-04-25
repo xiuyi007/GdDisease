@@ -6,6 +6,7 @@ public class SqlHelper {
     public static String disease_sql(DiseaseChosenDto dto)
     {
         StringBuilder sql = new StringBuilder("select * from Disease where 1 = 1");
+        //虽然这段写的很离谱，但是别动，数据库设计的不好，被迫的
         if (dto.getStatus() != 0)
         {
             if (dto.getStatus() == 3)
