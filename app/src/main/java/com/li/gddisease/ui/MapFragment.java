@@ -1,12 +1,15 @@
 package com.li.gddisease.ui;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.SyncStateContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 
 import androidx.annotation.NonNull;
@@ -24,7 +27,9 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.li.gddisease.AppDatabase;
+import com.li.gddisease.MainActivity;
 import com.li.gddisease.R;
+import com.li.gddisease.UploadActivity;
 import com.li.gddisease.dao.DiseaseDao;
 import com.li.gddisease.entity.Disease;
 
@@ -39,6 +44,7 @@ public class MapFragment extends Fragment implements AMap.OnMyLocationChangeList
     private AppDatabase db;
     private DiseaseDao diseaseDao;
     private List<Disease> list;
+    private ImageView mImg;
 
 
     @Nullable
@@ -62,6 +68,27 @@ public class MapFragment extends Fragment implements AMap.OnMyLocationChangeList
         if (aMap == null) {
             aMap = mapView.getMap();
         }
+        init(view);
+        getDb();
+        getDao();
+        drawMarker("");
+        LatLng center = new LatLng(29.8683, 121.5440);
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 12));
+
+//        InsertDisease();
+//        InsertHandle();
+    }
+    private void init(View view) {
+        mImg = view.findViewById(R.id.btn_map);
+        mImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), UploadActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    private void setMap(){
         // 定义 Marker 点击事件监听
         AMap.OnMarkerClickListener markerClickListener = new AMap.OnMarkerClickListener() {
             // marker 对象被点击时回调的接口
@@ -73,14 +100,7 @@ public class MapFragment extends Fragment implements AMap.OnMyLocationChangeList
         };
         // 绑定 Marker 被点击事件
         aMap.setOnMarkerClickListener(markerClickListener);
-        getDb();
-        getDao();
-        drawMarker("");
-        LatLng center = new LatLng(29.8683, 121.5440);
-        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 12));
 
-//        InsertDisease();
-//        InsertHandle();
     }
 
     //效率太差了

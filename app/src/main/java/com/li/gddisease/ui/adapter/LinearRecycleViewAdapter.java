@@ -45,6 +45,7 @@ public class LinearRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
         private TextView status;
         private TextView longitude;
         private TextView latitude;
+        private TextView date;
 
         public TextView getMid() {
             return mid;
@@ -64,6 +65,9 @@ public class LinearRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
         public TextView getLatitude() {
             return latitude;
         }
+        public TextView getDate() {
+            return date;
+        }
         public LinearViewHolder(@NonNull View itemView) {
             super(itemView);
             mid = itemView.findViewById(R.id.item_id);
@@ -72,7 +76,10 @@ public class LinearRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
             status = itemView.findViewById(R.id.item_status);
             longitude = itemView.findViewById(R.id.item_longtitude);
             latitude = itemView.findViewById(R.id.item_latitude);
+            date = itemView.findViewById(R.id.item_date);
         }
+
+
     }
 
 
@@ -94,6 +101,7 @@ public class LinearRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
         mHolder.getLatitude().setText((double) disease.getLatitude() + "");
         mHolder.getLongitude().setText((double) disease.getLongitude() + "");
         mHolder.getStatus().setText(MyUtil.convertStatus_toString(disease.getStatus()));
+        mHolder.getDate().setText(disease.getDate().toString());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

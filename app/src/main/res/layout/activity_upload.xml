@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="病害上传"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:id="@+id/edit_text_disease_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入病害位置：可选"/>
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:id="@+id/edit_text_disease_longitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入病害经度"/>
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:id="@+id/edit_text_disease_latitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入病害纬度"/>
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:id="@+id/edit_text_disease_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入病害描述"/>
+        <RadioGroup
+            android:layout_marginTop="10dp"
+            android:id="@+id/radioGroup_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButton1_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="鄞州"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/radioButton2_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="海曙"/>
+
+            <RadioButton
+                android:id="@+id/radioButton3_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="北仑"/>
+            <RadioButton
+                android:id="@+id/radioButton4_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="镇海"/>
+            <RadioButton
+                android:id="@+id/radioButton5_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="江北"/>
+
+        </RadioGroup>
+        <RadioGroup
+            android:layout_marginTop="10dp"
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="线裂"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="坑洞"/>
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="跳车"/>
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="错台"/>
+            <RadioButton
+                android:id="@+id/radioButton5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="沉陷"/>
+
+        </RadioGroup>
+
+
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/button_upload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="上传病害"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    &lt;!&ndash; 标题栏 &ndash;&gt;
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary">
+
+        &lt;!&ndash; 返回按钮 &ndash;&gt;
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/"
+            android:background="?attr/selectableItemBackground"
+            android:padding="10dp"
+            android:contentDescription="返回"
+            android:scaleType="centerInside"/>
+
+        &lt;!&ndash; 标题 &ndash;&gt;
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="病害上传"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+
+        &lt;!&ndash; 保存按钮 &ndash;&gt;
+        <TextView
+            android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="保存"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    &lt;!&ndash; 内容区域 &ndash;&gt;
+    <ScrollView
+        android:layout_below="@id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            &lt;!&ndash; 病害名称 &ndash;&gt;
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/disease_name"
+                android:textSize="16sp"
+                android:textColor="@color/colorAccent"/>
+
+            <EditText
+                android:id="@+id/et_disease_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"/>
+
+            &lt;!&ndash; 病害类型 &ndash;&gt;
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/disease_type"
+                android:textSize="16sp"
+                android:textColor="@color/colorAccent"/>
+
+            <RadioGroup
+                android:id="@+id/rg_disease_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_type_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/type_1"/>
+
+                <RadioButton
+                    android:id="@+id/rb_type_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/type_2"/>-->

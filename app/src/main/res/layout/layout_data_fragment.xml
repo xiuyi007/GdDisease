@@ -38,39 +38,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:paddingRight="3dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="编号"
             android:textSize="@dimen/data_title_size" />
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="地区"
-            android:textSize="@dimen/data_title_size" />
-        <TextView
+            android:paddingRight="3dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="纬度"
+            android:text="地区"
             android:textSize="@dimen/data_title_size" />
         <TextView
+            android:paddingRight="3dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="经度"
             android:textSize="@dimen/data_title_size" />
         <TextView
+            android:paddingRight="3dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
+            android:text="纬度"
+            android:textSize="@dimen/data_title_size" />
+        <TextView
+            android:paddingRight="3dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="类型"
             android:textSize="@dimen/data_title_size" />
         <TextView
+            android:paddingRight="3dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
+            android:text="日期"
+            android:textSize="@dimen/data_title_size" />
+        <TextView
+            android:paddingRight="3dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="状态"
             android:textSize="@dimen/data_title_size" />
     </LinearLayout>
