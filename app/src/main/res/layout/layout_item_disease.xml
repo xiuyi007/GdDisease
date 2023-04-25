@@ -7,30 +7,44 @@
     android:layout_marginTop="10dp"
     android:padding="10dp">
     <TextView
+        android:paddingRight="3dp"
+
         android:textSize="@dimen/data_info_size"
+        android:maxLines="1"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:id="@+id/item_id"/>
     <TextView
+        android:paddingRight="3dp"
+
         android:textSize="@dimen/data_info_size"
+        android:maxLines="1"
         android:layout_width="0dp"
         android:layout_weight="2"
         android:layout_height="wrap_content"
         android:id="@+id/item_place"/>
     <TextView
+        android:paddingRight="3dp"
+
+        android:maxLines="1"
         android:textSize="@dimen/data_info_size"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:id="@+id/item_longtitude"/>
     <TextView
+        android:paddingRight="3dp"
+
+        android:maxLines="1"
         android:textSize="@dimen/data_info_size"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:id="@+id/item_latitude"/>
     <TextView
+        android:maxLines="1"
+        android:paddingRight="3dp"
         android:textSize="@dimen/data_info_size"
         android:layout_width="0dp"
         android:layout_weight="2"
@@ -38,6 +52,9 @@
         android:text="hahaha"
         android:id="@+id/item_type"/>
     <TextView
+        android:paddingRight="3dp"
+
+        android:maxLines="1"
         android:textSize="@dimen/data_info_size"
         android:layout_width="0dp"
         android:layout_weight="2"

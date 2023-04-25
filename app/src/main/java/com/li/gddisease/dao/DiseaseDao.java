@@ -2,6 +2,7 @@ package com.li.gddisease.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.RawQuery;
@@ -19,6 +20,15 @@ public interface DiseaseDao {
     @RawQuery
     List<DiseaseReturnPojo> getDiseaseByConditional(SupportSQLiteQuery query);
 
+    @Query("select * from disease")
+    List<Disease> getDiseaseAll();
+
+    @Query("select * from disease where place = :place")
+    List<Disease> getDiseaseByPlace(String place);
+
     @Insert
-    void insertUsers(Disease... diseases);
+    void insertDiseases(Disease... diseases);
+
+    @Query("delete from Disease")
+    void deleteAll();
 }

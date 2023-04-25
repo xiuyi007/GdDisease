@@ -189,7 +189,7 @@ public class DataFragment extends Fragment implements AdapterView.OnItemSelected
         if (disease.getStatus() == 3)
         {
             for (int i = 0; i < data.size(); i++) {
-                data.get(i).setType(3);
+                data.get(i).setStatus(3);
             }
         }
         list = data;
