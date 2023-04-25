@@ -5,7 +5,15 @@ import com.li.gddisease.ui.DataFragment;
 import com.li.gddisease.ui.MapFragment;
 import com.li.gddisease.ui.MeFragment;
 
+import java.sql.Date;
+
+
 public class MyUtil {
+
+    public static Date getDate()
+    {
+        return new Date(System.currentTimeMillis());
+    }
     public static int ConvertType_toInt(String type)
     {
         int tmp = 0;

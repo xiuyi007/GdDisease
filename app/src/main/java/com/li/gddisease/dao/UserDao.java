@@ -24,7 +24,9 @@ public interface UserDao {
     int delete(User... users);
 
     @Insert
-    void insertUsers(User... users);
+    Long[] insertUsers(User... users);
+
+
 
     @Update
     public int updateUsers(User... users);

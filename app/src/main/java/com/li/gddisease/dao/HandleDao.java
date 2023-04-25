@@ -9,7 +9,7 @@ import com.li.gddisease.entity.Handle;
 @Dao
 public interface HandleDao {
     @Insert
-    void insert(Handle... handle);
+    Long[] insert(Handle... handle);
 
     @Query("delete from Handle")
     void deleteAll();

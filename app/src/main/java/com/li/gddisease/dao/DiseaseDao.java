@@ -27,7 +27,10 @@ public interface DiseaseDao {
     List<Disease> getDiseaseByPlace(String place);
 
     @Insert
-    void insertDiseases(Disease... diseases);
+    Long[] insertDiseases(Disease... diseases);
+
+    @Insert
+    Long insertDisease(Disease diseases);
 
     @Query("delete from Disease")
     void deleteAll();
