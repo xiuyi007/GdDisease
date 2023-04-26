@@ -22,11 +22,17 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     TextView mTvMap, mTvData, mTvHome;
+    private int id;
     private AppDatabase db;
 
+    public int getUserId()
+    {
+        return id;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        id = 1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {

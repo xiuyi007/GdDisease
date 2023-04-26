@@ -1,21 +1,137 @@
 package com.li.gddisease.ui;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.sqlite.db.SimpleSQLiteQuery;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
+import com.li.gddisease.AppDatabase;
+import com.li.gddisease.MainActivity;
 import com.li.gddisease.R;
+import com.li.gddisease.dao.DiseaseDao;
+import com.li.gddisease.dto.DiseaseChosenDto;
+import com.li.gddisease.dto.UserDiseaseDto;
+import com.li.gddisease.entity.Disease;
+import com.li.gddisease.pojo.DiseaseReturnPojo;
+import com.li.gddisease.ui.adapter.LinearRecycleViewAdapter;
+import com.li.gddisease.ui.adapter.MeLinearRecycleViewAdapter;
 
-public class MeFragment extends Fragment {
+import java.util.List;
+
+import util.SqlHelper;
+import util.ToastUtil;
+
+public class MeFragment extends Fragment implements MeLinearRecycleViewAdapter.OnItemClickListener, MeLinearRecycleViewAdapter.OnDoneItemClickListener {
+    private RecyclerView mRv;
+    private AppDatabase db;
+    private DiseaseDao diseaseDao;
+    private List<Disease> list_target;
+    private List<Disease> list_done;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_me_fragment, container, false);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getDb();
+        getDao();
+        setData(1);
+        setData(2);
+        setRecycleView(view, list_target, R.id.me_rv_target);
+        setRecycleView(view, list_done, R.id.me_rv_ok);
+    }
+
+    //1获取处理中的数据，2获取处理完的数据
+    private void setData(int status)
+    {
+
+        UserDiseaseDto dto = new UserDiseaseDto();
+        dto.setStatus(status);
+        dto.setUserId(getUserId());
+        if (status == 1)
+        {
+            list_target = diseaseDao.getDisease_user_status(dto.getUserId(),dto.getStatus());
+        }
+        else if(status == 2)
+        {
+            list_done = diseaseDao.getDisease_user_status(dto.getUserId(),dto.getStatus());
+        }
+    }
+
+    private void setRecycleView(View view, List<Disease> list, int id)
+    {
+        mRv = view.findViewById(id);
+        mRv.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        mRv.setLayoutManager(new LinearLayoutManager(getContext()));
+        if (id == R.id.me_rv_target)
+            mRv.setAdapter(new MeLinearRecycleViewAdapter(getContext(), (MeLinearRecycleViewAdapter.OnItemClickListener) this, list, id));
+        else
+            mRv.setAdapter(new MeLinearRecycleViewAdapter(getContext(), (MeLinearRecycleViewAdapter.OnDoneItemClickListener) this, list, id));
+    }
+
+    private void getDb()
+    {
+        db = AppDatabase.getInstance(getActivity());
+    }
+
+    private void getDao()
+    {
+        diseaseDao = db.diseaseDao();
+    }
+
+
+    //图速度，有问题的话再改回调吧
+    private int getUserId()
+    {
+        MainActivity activity = (MainActivity)getActivity();
+        return activity.getUserId();
+    }
+
+    /*
+        id是点击的病害的id号,数据库中的。
+     */
+    @Override
+    public void OnClick(int id) {
+        String[] choice = new String[] {"标记为已处理", "修改"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("选择你要进行的操作").setIcon(R.drawable.rabbit)
+                .setSingleChoiceItems(choice, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ToastUtil.showMsg(getContext(), id+"");
+                        dialog.dismiss();
+                    }
+                }).setCancelable(true).show();
+    }
+
+    @Override
+    public void On_done_Click(int id) {
+        String[] choice = new String[] {"标记为处理中"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("请确认").setIcon(R.drawable.rabbit)
+                .setSingleChoiceItems(choice, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ToastUtil.showMsg(getContext(), id+"");
+                        dialog.dismiss();
+                    }
+                }).setCancelable(true).show();
     }
 }

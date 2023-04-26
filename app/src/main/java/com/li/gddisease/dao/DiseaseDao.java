@@ -26,8 +26,13 @@ public interface DiseaseDao {
     @Query("select * from disease where place = :place")
     List<Disease> getDiseaseByPlace(String place);
 
+    @Query("select disease.id, place, longitude, latitude, type, description, date from disease, handle " +
+            "where Disease.id = handle.disease_id and user_id = :userId and status = :status")
+    List<Disease> getDisease_user_status(int userId, int status);
+
     @Insert
     Long[] insertDiseases(Disease... diseases);
+
 
     @Insert
     Long insertDisease(Disease diseases);

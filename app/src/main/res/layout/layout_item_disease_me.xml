@@ -60,16 +60,6 @@
         android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/item_date"/>
-    <TextView
-        android:paddingRight="3dp"
-
-        android:maxLines="1"
-        android:textSize="@dimen/data_info_size"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/item_status"/>
 
 
 </LinearLayout>

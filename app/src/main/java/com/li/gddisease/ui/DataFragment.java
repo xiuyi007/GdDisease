@@ -76,7 +76,7 @@ public class DataFragment extends Fragment implements AdapterView.OnItemSelected
     {
         if (list == null)
         {
-            System.out.println();;
+            System.out.println();
         }
         else
             System.out.println();
