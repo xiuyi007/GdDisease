@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/me_head"
             android:layout_marginLeft="15dp"
-            android:text="游客"
+            android:text="togethf"
             android:drawableLeft="@drawable/account_small"
             android:textSize="18dp" />
         <TextView

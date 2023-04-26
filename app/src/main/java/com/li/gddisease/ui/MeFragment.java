@@ -12,9 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.util.TableInfo;
 import androidx.sqlite.db.SimpleSQLiteQuery;
 import androidx.sqlite.db.SupportSQLiteQuery;
 
@@ -22,9 +24,11 @@ import com.li.gddisease.AppDatabase;
 import com.li.gddisease.MainActivity;
 import com.li.gddisease.R;
 import com.li.gddisease.dao.DiseaseDao;
+import com.li.gddisease.dao.HandleDao;
 import com.li.gddisease.dto.DiseaseChosenDto;
 import com.li.gddisease.dto.UserDiseaseDto;
 import com.li.gddisease.entity.Disease;
+import com.li.gddisease.entity.Handle;
 import com.li.gddisease.pojo.DiseaseReturnPojo;
 import com.li.gddisease.ui.adapter.LinearRecycleViewAdapter;
 import com.li.gddisease.ui.adapter.MeLinearRecycleViewAdapter;
@@ -45,6 +49,13 @@ public class MeFragment extends Fragment implements MeLinearRecycleViewAdapter.O
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_me_fragment, container, false);
         return view;
+    }
+
+    public void refresh()
+    {
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container_view, new MeFragment());
+        transaction.commit();
     }
 
     @Override
@@ -103,7 +114,17 @@ public class MeFragment extends Fragment implements MeLinearRecycleViewAdapter.O
         MainActivity activity = (MainActivity)getActivity();
         return activity.getUserId();
     }
+    private void setDiseaseTarget(int id)
+    {
+        HandleDao handleDao = db.handleDao();
+        handleDao.updateDiseasesStatus(id, 1);
+    }
 
+    private void setDiseaseDone(int id)
+    {
+        HandleDao handleDao = db.handleDao();
+        handleDao.updateDiseasesStatus(id, 2);
+    }
     /*
         id是点击的病害的id号,数据库中的。
      */
@@ -115,10 +136,15 @@ public class MeFragment extends Fragment implements MeLinearRecycleViewAdapter.O
                 .setSingleChoiceItems(choice, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ToastUtil.showMsg(getContext(), id+"");
-                        dialog.dismiss();
+                        if (which == 0)
+                        {
+                            setDiseaseDone(id);
+                            dialog.dismiss();
+                        }
+                        refresh();
                     }
                 }).setCancelable(true).show();
+//        onViewCreated();
     }
 
     @Override
@@ -129,8 +155,9 @@ public class MeFragment extends Fragment implements MeLinearRecycleViewAdapter.O
                 .setSingleChoiceItems(choice, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ToastUtil.showMsg(getContext(), id+"");
+                        setDiseaseTarget(id);
                         dialog.dismiss();
+                        refresh();
                     }
                 }).setCancelable(true).show();
     }
