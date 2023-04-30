@@ -19,6 +19,10 @@ public class HandleInfoGenerator {
     private static Set<Integer> usedIds = new HashSet<Integer>();
     private static Set<Integer> diseasedIds = new HashSet<Integer>();
     private static Set<Integer> handleIds = new HashSet<Integer>();
+    private static int d_size;
+    private static int u_size;
+    private static List<Disease> diseaseList;
+    private static List<User> userList;
 
     /*
     自动编号，无需生成id
@@ -43,13 +47,19 @@ public class HandleInfoGenerator {
         return num;
     }
 
+    public void set_Self()
+    {
+        diseaseList= db.diseaseDao().getDiseaseAll();
+        userList = db.userDao().getALL();
+        d_size = diseaseList.size();
+        u_size = userList.size();
+    }
+
     //这个代码是有问题的，理论上不能出现重复元素,这里为了实现多对多，原则上是不应该出现重复元素的，可能是数据库设计的不合理
     public Handle generateInfo()
     {
-        List<Disease> diseases = db.diseaseDao().getDiseaseAll();
-        int diseaseId = diseases.get(random.nextInt(diseases.size())).getId();
-        List<User> users = db.userDao().getALL();
-        int userId = users.get(random.nextInt(users.size())).getId();
+        int diseaseId = diseaseList.get(random.nextInt(d_size)).getId();
+        int userId = userList.get(random.nextInt(u_size)).getId();
         Handle handle = new Handle();
         handle.setDiseaseId(diseaseId);
         handle.setUserId(userId);

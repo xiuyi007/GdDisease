@@ -15,7 +15,10 @@ import androidx.fragment.app.Fragment;
 
 import com.li.gddisease.MainActivity;
 import com.li.gddisease.R;
+import com.li.gddisease.dto.DiseaseChosenDto;
+import com.li.gddisease.ui.DataFragment;
 
+import java.sql.Date;
 import java.util.Calendar;
 
 import util.ToastUtil;
@@ -53,5 +56,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         listener.click(year + "/" + month + "/" + dayOfMonth);
+        DataFragment dataFragment = (DataFragment) getParentFragmentManager().findFragmentByTag("data");
+        Date date = new Date(year, month, dayOfMonth);
+        dataFragment.setDiseaseChosen(date);
     }
 }

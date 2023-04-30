@@ -2,6 +2,7 @@ package util;
 
 import com.li.gddisease.dto.DiseaseChosenDto;
 
+
 public class SqlHelper {
     public static String disease_sql(DiseaseChosenDto dto)
     {
@@ -20,6 +21,16 @@ public class SqlHelper {
                 sql = new StringBuilder("select * from Disease, Handle where " +
                         "Disease.id = Handle.disease_id and status = " + dto.getStatus());
             }
+        }
+        if (dto.getDate() != null)
+        {
+            int year = dto.getDate().getYear();
+            int month = dto.getDate().getMonth();
+            if (month < 10)
+                sql.append(" and strftime('%Y', datetime(date/1000, 'unixepoch')) = '" + year + "' and strftime('%m', datetime(date/1000, 'unixepoch')) = '0" + month + "'");
+            else
+                sql.append(" and strftime('%Y', datetime(date/1000, 'unixepoch')) = '" + year + "' and strftime('%m', datetime(date/1000, 'unixepoch')) = '" + month + "'");
+
         }
         if (dto.getPlace() != null)
         {

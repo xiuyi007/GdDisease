@@ -25,16 +25,14 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import androidx.sqlite.db.SupportSQLiteQuery;
 
 import com.li.gddisease.AppDatabase;
-import com.li.gddisease.MainActivity;
 import com.li.gddisease.R;
 import com.li.gddisease.dao.DiseaseDao;
 import com.li.gddisease.dto.DiseaseChosenDto;
-import com.li.gddisease.entity.Disease;
-import com.li.gddisease.entity.User;
 import com.li.gddisease.pojo.DiseaseReturnPojo;
 import com.li.gddisease.ui.adapter.DatePickerFragment;
 import com.li.gddisease.ui.adapter.LinearRecycleViewAdapter;
 
+import java.util.Date;
 import java.util.List;
 
 import util.MyUtil;
@@ -52,6 +50,27 @@ public class DataFragment extends Fragment implements AdapterView.OnItemSelected
     private RecyclerView mRv;
     private List<DiseaseReturnPojo> list;
     private View recycleView;
+
+    //这里使用是打算给DatePicker使用给
+    public DiseaseChosenDto getChosenDisease()
+    {
+        return disease;
+    }
+    public void setDiseaseChosen(Date date)
+    {
+        this.disease.setDate(date);
+        String sql = SqlHelper.disease_sql(disease);
+        SupportSQLiteQuery sqLiteQuery = new SimpleSQLiteQuery(sql);
+        List<DiseaseReturnPojo> data = diseaseDao.getDiseaseByConditional(sqLiteQuery);
+        if (disease.getStatus() == 3)
+        {
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).setStatus(3);
+            }
+        }
+        list = data;
+        setRecycleView(recycleView);
+    }
 
     @Nullable
     @Override

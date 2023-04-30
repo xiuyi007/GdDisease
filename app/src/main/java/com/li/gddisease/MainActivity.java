@@ -64,18 +64,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = null;
+        String tag = null;
         switch (v.getId())
         {
             case R.id.map:
                 fragment = new MapFragment();
+                tag = "map";
                 break;
             case R.id.data:
                 fragment = new DataFragment();
+                tag = "data";
                 break;
             case R.id.home:
+                tag = "home";
                 fragment = new MeFragment();
                 break;
         }
-        fragmentTransaction.replace(R.id.fragment_container_view, fragment).commitAllowingStateLoss();
+        fragmentTransaction.replace(R.id.fragment_container_view, fragment, tag).commitAllowingStateLoss();
     }
 }

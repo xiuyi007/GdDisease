@@ -75,8 +75,8 @@ public class MapFragment extends Fragment implements AMap.OnMyLocationChangeList
         LatLng center = new LatLng(29.8683, 121.5440);
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 12));
 
-//        InsertDisease();
-//        InsertHandle();
+/*        InsertDisease();
+        InsertHandle();*/
     }
     private void init(View view) {
         mImg = view.findViewById(R.id.btn_map);
@@ -106,18 +106,19 @@ public class MapFragment extends Fragment implements AMap.OnMyLocationChangeList
     //效率太差了
     private void InsertHandle()
     {
-        db.handleDao().deleteAll();
+//        db.handleDao().deleteAll();
         HandleInfoGenerator generator = new HandleInfoGenerator(db);
-        for (int i = 0; i < 20; i++) {
-            db.handleDao().insert(generator.generateHandleInfo());
+        generator.set_Self();
+        for (int i = 0; i < 400; i++) {
+            db.handleDao().insert(generator.generateInfo());
         }
     }
 
     private void InsertDisease()
     {
-//        db.handleDao().deleteAll();
+        db.handleDao().deleteAll();
         diseaseDao.deleteAll();
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < 800; i++) {
             diseaseDao.insertDiseases(DiseaseInfoGenerator.generateRandomDisease());
         }
     }
