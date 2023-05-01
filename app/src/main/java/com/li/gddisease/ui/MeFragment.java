@@ -1,10 +1,12 @@
 package com.li.gddisease.ui;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,7 @@ import androidx.sqlite.db.SimpleSQLiteQuery;
 import androidx.sqlite.db.SupportSQLiteQuery;
 
 import com.li.gddisease.AppDatabase;
+import com.li.gddisease.LoginActivity;
 import com.li.gddisease.MainActivity;
 import com.li.gddisease.R;
 import com.li.gddisease.dao.DiseaseDao;
@@ -33,6 +36,8 @@ import com.li.gddisease.pojo.DiseaseReturnPojo;
 import com.li.gddisease.ui.adapter.LinearRecycleViewAdapter;
 import com.li.gddisease.ui.adapter.MeLinearRecycleViewAdapter;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import util.SqlHelper;
@@ -44,6 +49,7 @@ public class MeFragment extends Fragment implements MeLinearRecycleViewAdapter.O
     private DiseaseDao diseaseDao;
     private List<Disease> list_target;
     private List<Disease> list_done;
+    private TextView tv_me_head;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,10 +69,23 @@ public class MeFragment extends Fragment implements MeLinearRecycleViewAdapter.O
         super.onViewCreated(view, savedInstanceState);
         getDb();
         getDao();
+        setName(view);
         setData(1);
         setData(2);
         setRecycleView(view, list_target, R.id.me_rv_target);
         setRecycleView(view, list_done, R.id.me_rv_ok);
+        //也许是个不合理的跳转选择
+        tv_me_head.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        });
+    }
+
+    private void setName(View view)
+    {
+        tv_me_head = view.findViewById(R.id.me_head);
+        tv_me_head.setText(db.userDao().getUserById(getUserId()).getUsername());
     }
 
     //1获取处理中的数据，2获取处理完的数据

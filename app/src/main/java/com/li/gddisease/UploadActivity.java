@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.li.gddisease.common.baseActivity;
 import com.li.gddisease.entity.Disease;
 
 import java.sql.Date;
@@ -20,7 +21,7 @@ import java.text.SimpleDateFormat;
 import util.MyUtil;
 import util.ToastUtil;
 
-public class UploadActivity extends AppCompatActivity {
+public class UploadActivity extends baseActivity {
     private EditText mEtLongitude;
     private EditText mEtLatitude;
     private EditText mEtDescription;

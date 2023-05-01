@@ -13,4 +13,7 @@
     <color name="me_color_title">#9F000000</color>
     <color name="search_bar_container_color">#D1D0D0</color>
     <color name="m_background">#F1F1F1</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
 </resources>

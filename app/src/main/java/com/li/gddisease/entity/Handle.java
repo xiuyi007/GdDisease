@@ -3,6 +3,7 @@ package com.li.gddisease.entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -27,6 +28,7 @@ public class Handle {
 
     public int status;
 
+    @Ignore
     public Handle() {}
 
     public Handle(int userId, int diseaseId, int status) {
@@ -36,6 +38,7 @@ public class Handle {
     }
 
     @Deprecated
+    @Ignore
     public Handle(int id, int userId, int diseaseId, int status) {
         this.id = id;
         this.userId = userId;

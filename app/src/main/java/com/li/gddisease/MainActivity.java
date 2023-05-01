@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.li.gddisease.common.baseActivity;
 import com.li.gddisease.dao.UserDao;
 import com.li.gddisease.entity.User;
 import com.li.gddisease.ui.DataFragment;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends baseActivity implements View.OnClickListener {
     TextView mTvMap, mTvData, mTvHome;
     private int id;
     private AppDatabase db;
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void init() {
+        String userId = getIntent().getStringExtra("userId");
+        id = Integer.parseInt(userId);
         db = AppDatabase.getInstance(this);
         mTvMap = findViewById(R.id.map);
         mTvData = findViewById(R.id.data);

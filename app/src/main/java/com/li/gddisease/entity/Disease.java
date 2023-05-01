@@ -1,6 +1,7 @@
 package com.li.gddisease.entity;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -9,9 +10,9 @@ import java.sql.Date;
 
 @Entity
 public class Disease {
+    @Ignore
     public Disease() {
     }
-
 
     @PrimaryKey(autoGenerate = true)
     public int id;
@@ -85,6 +86,7 @@ public class Disease {
     /*
     自动编号后不需要赋值id
      */
+    @Ignore
     @Deprecated
     public Disease(int id, String place, double longitude, double latitude, int type, String description, Date date) {
         this.id = id;

@@ -26,6 +26,8 @@ public interface UserDao {
     @Insert
     Long[] insertUsers(User... users);
 
+    @Query("select * from user where username = :uname")
+    User getUserByName(String uname);
 
 
     @Update
