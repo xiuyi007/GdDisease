@@ -33,8 +33,11 @@ import com.li.gddisease.dto.UserDiseaseDto;
 import com.li.gddisease.entity.Disease;
 import com.li.gddisease.entity.Handle;
 import com.li.gddisease.pojo.DiseaseReturnPojo;
+import com.li.gddisease.ui.account.AccountActivity;
 import com.li.gddisease.ui.adapter.LinearRecycleViewAdapter;
 import com.li.gddisease.ui.adapter.MeLinearRecycleViewAdapter;
+import com.li.gddisease.ui.message.MessageActivity;
+import com.li.gddisease.ui.setting.SettingActivity;
 
 import org.w3c.dom.Text;
 
@@ -50,6 +53,8 @@ public class MeFragment extends Fragment implements MeLinearRecycleViewAdapter.O
     private List<Disease> list_target;
     private List<Disease> list_done;
     private TextView tv_me_head;
+    private TextView tv_me_message;
+    private TextView tv_me_setting;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,6 +72,7 @@ public class MeFragment extends Fragment implements MeLinearRecycleViewAdapter.O
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        init(view);
         getDb();
         getDao();
         setName(view);
@@ -74,17 +80,35 @@ public class MeFragment extends Fragment implements MeLinearRecycleViewAdapter.O
         setData(2);
         setRecycleView(view, list_target, R.id.me_rv_target);
         setRecycleView(view, list_done, R.id.me_rv_ok);
-        //也许是个不合理的跳转选择
-        tv_me_head.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), LoginActivity.class);
+
+    }
+
+    private void init(View view)
+    {
+        tv_me_head = view.findViewById(R.id.me_head);
+        tv_me_message = view.findViewById(R.id.me_message);
+        tv_me_setting = view.findViewById(R.id.me_setting);
+        setListener();
+    }
+
+    private void setListener()
+    {
+        tv_me_setting.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), SettingActivity.class);
             startActivity(intent);
-            getActivity().finish();
+        });
+        tv_me_message.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), MessageActivity.class);
+            startActivity(intent);
+        });
+        tv_me_head.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), AccountActivity.class);
+            startActivity(intent);
         });
     }
 
     private void setName(View view)
     {
-        tv_me_head = view.findViewById(R.id.me_head);
         tv_me_head.setText(db.userDao().getUserById(getUserId()).getUsername());
     }
 
