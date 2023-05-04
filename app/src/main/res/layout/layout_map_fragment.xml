@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/m_background">
-    <RelativeLayout
+<!--    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/choose_tips">
@@ -15,19 +15,65 @@
             android:text="道路病害展示"
             android:textSize="30sp"
             android:textColor="#205565" />
-        <ImageView
-            android:id="@+id/iv_all"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="7dp"
-            android:layout_marginRight="30dp"
-            android:layout_width="23dp"
+    </RelativeLayout>-->
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/daohang_group"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/et_group"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="8"
             android:layout_height="wrap_content"
-            android:src="@drawable/reset"/>
-    </RelativeLayout>
+            android:layout_marginRight="10dp">
+            <EditText
+                android:id="@+id/roadsearch_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/et_background"
+                android:dropDownVerticalOffset="1.0dip"
+                android:hint="起点: 当前位置"
+                android:maxLength="20"
+                android:paddingRight="37.0dip"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="16.0sp" />
+
+            <EditText
+                android:id="@+id/roadsearch_goals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/et_background"
+                android:layout_below="@id/roadsearch_start"
+                android:hint="目的病害: 待选择"
+                android:maxLength="20"
+                android:paddingRight="37.0dip"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="16.0sp" />
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_go"
+            android:gravity="center"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Go"
+            android:paddingRight="10dp"
+            android:textSize="20sp" />
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/choose_choice"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/choose_tips"
+        android:layout_below="@id/daohang_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -63,12 +109,22 @@
             android:text="江北"/>
     </LinearLayout>
 
+
     <com.amap.api.maps.MapView
         android:id="@+id/map"
         android:layout_below="@id/choose_choice"
         android:layout_width="match_parent"
 
         android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/iv_all"
+        android:layout_below="@id/choose_choice"
+        android:padding="12dp"
+        android:layout_alignParentLeft="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/reset"/>
 
     <ImageView
         android:src="@drawable/plus"
