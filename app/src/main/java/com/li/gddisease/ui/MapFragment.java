@@ -153,7 +153,7 @@ public class MapFragment extends Fragment implements AMap.OnMyLocationChangeList
     //简化工作，设置出发点只能为自己当前位置。
     public void setStartPointAsMe()
     {
-        this.startPoint = new LatLonPoint(29.8683, 121.5440);
+        this.startPoint = new LatLonPoint(29.814991, 121.57445);
     }
 
     /**
