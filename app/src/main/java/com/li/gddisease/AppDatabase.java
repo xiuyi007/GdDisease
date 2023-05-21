@@ -21,7 +21,7 @@ import util.Converters;
         entities = {User.class, Disease.class, Handle.class}, version = 2
         )
 public abstract class AppDatabase extends RoomDatabase {
-    private static final String DB_NAME = "mDatabase.db";
+    private static final String DB_NAME = "mApp.db";
     private static volatile AppDatabase instance;
 
     public static synchronized AppDatabase getInstance(Context context) {
@@ -35,7 +35,14 @@ public abstract class AppDatabase extends RoomDatabase {
         return Room.databaseBuilder(
                 context,
                 AppDatabase.class,
-                DB_NAME).fallbackToDestructiveMigration().allowMainThreadQueries().build();
+                DB_NAME)
+                .createFromAsset("database/mDatabase.db")
+                .fallbackToDestructiveMigration().allowMainThreadQueries().build();
+
+//        return Room.databaseBuilder(
+//                context,
+//                AppDatabase.class,
+//                DB_NAME).fallbackToDestructiveMigration().allowMainThreadQueries().build();
     }
 
 
